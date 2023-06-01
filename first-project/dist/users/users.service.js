@@ -20,6 +20,21 @@ const mongoose_2 = require("mongoose");
 let UsersService = class UsersService {
     constructor(userModel) {
         this.userModel = userModel;
+        this.users = [
+            {
+                userId: 1,
+                username: 'john',
+                password: 'changeme',
+            },
+            {
+                userId: 2,
+                username: 'maria',
+                password: 'guess',
+            },
+        ];
+    }
+    async findUser(username) {
+        return this.users.find(user => user.username === username);
     }
     create(createUserDto) {
         if (createUserDto.age > 100) {

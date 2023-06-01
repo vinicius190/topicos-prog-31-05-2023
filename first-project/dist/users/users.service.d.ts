@@ -26,9 +26,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
+export type Users = any;
 export declare class UsersService {
     private userModel;
+    private readonly users;
     constructor(userModel: Model<User>);
+    findUser(username: string): Promise<Users | undefined>;
     create(createUserDto: CreateUserDto): Promise<import("mongoose").Document<unknown, {}, User> & Omit<User & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;
