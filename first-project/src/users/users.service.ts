@@ -5,9 +5,28 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 
+export type Users = any;
+
 @Injectable()
 export class UsersService {
+  private readonly users = [
+    {
+      userId: 1,
+      username: 'john',
+      password: 'changeme',
+    },
+    {
+      userId: 2,
+      username: 'maria',
+      password: 'guess',
+    },
+  ];
+
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+
+  async findUser(username: string): Promise<Users | undefined> {
+    return this.users.find(user => user.username === username);
+  }
 
   create(createUserDto: CreateUserDto) {
     if (createUserDto.age > 100) {
